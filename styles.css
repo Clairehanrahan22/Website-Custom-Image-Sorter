@@ -5,13 +5,34 @@ html, body {
     height: 100%;
   }
   
+.home-page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-sort-button, .home-page a {
+  text-decoration: none;
+  display: flex;
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  background-color: slategray;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin: 5%;
+}
   /* The entire screen is the drop zone, including the drag container */
   #dropZone {
     position: relative;
     width: 100%;
     height: 100%; /* Take up the entire screen */
-    border: 2px dashed #999;
-    background-color: #f9f9f9;
   }
   
   /* Drag container starts at the bottom, but is part of the drop zone */
@@ -21,42 +42,99 @@ html, body {
     justify-content: center;
     align-items: center;
     background-color: #f1f1f1;
-    height: 40%; /* Draggable items start in the bottom 40% */
+    height: 25%; /* Draggable items start in the bottom 40% */
     position: absolute;
     bottom: 0;
     width: 100%;
+    border: 2px solid black;
   }
   
   /* Draggable items */
   .draggable {
-    padding: 10px;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
     cursor: grab;
   }
 
-  @keyframes sparkle {
-    0% {
-      transform: scale(1);
-      opacity: 0;
-    }
-    50% {
-      transform: scale(1.5);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(2);
-      opacity: 0;
-    }
+  img {
+    width: 75px;
   }
-  
-  .sparkle {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #fffacd; /* Light Yellow */
-    box-shadow: 0 0 10px rgba(255, 235, 153, 0.8), 0 0 20px rgba(255, 235, 153, 0.6);
-    animation: sparkle 0.5s ease-out;
-    pointer-events: none;
-  }
+
+.background-colors {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  top: 10%;
+  z-index: -2;
+}
+.color-headers {
+  width: 100%;
+  top: 0;
+  height: 100%;
+  z-index: -2;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  color: white;
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.background-color-green-header {
+  background-color: #39b95c;
+  height: 10%;
+  width: 25%;
+  border: 2px solid black;
+}
+.background-color-yellow-header {
+  background-color: #ffb001;
+  height: 10%;
+  width: 25%;
+  border: 2px solid black;
+}
+.background-color-blue-header {
+  background-color: #4f71ec;
+  height: 10%;
+  width: 25%;
+  border: 2px solid black;
+}
+.background-color-red-header {
+  background-color: #ff3d0a;
+  height: 10%;
+  width: 25%;
+  border: 2px solid black;
+}
+.background-color-green {
+  top: 10%;
+  height: 80%;
+  width: 25%;
+  background-color: #d5fddb;
+  border: 2px solid black;
+}
+.background-color-yellow {
+  top: 10%;
+  height: 80%;
+  width: 25%;
+  background-color: #fff5c2;
+  border: 2px solid black;
+}
+.background-color-blue {
+  top: 10%;
+  height: 80%;
+  width: 25%;
+  background-color: #bfe4ff;
+  border: 2px solid black;
+}
+.background-color-red {
+  top: 10%;
+  height: 80%;
+  width: 25%;
+  background-color: #ffb8a6;
+  border: 2px solid black;
+}
+.border-box {
+  position: relative;
+  border-top: 2px solid black;
+  width: 100%;
+  height: 50%;
+  top: 50%;
+}

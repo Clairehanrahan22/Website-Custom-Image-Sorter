@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1">
+        <title>Custom Image Sorter</title>
+        <meta name="description" content="A website I created for a friend working in the special ed field, designed for students to drag and drop images and sort them into categories. ">
+        <meta name="keywords" content="">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="dropZone">
+            <div id="dragContainer">
+                <div class="draggable" draggable="true">
+                    <img class="draggable" src="profileIcon.jpg" alt="Profile Icon">
+                </div>
+                <div class="draggable" draggable="true">
+                    <img class="draggable" src="profileIcon.jpg" alt="Profile Icon">
+                </div>
+                <div class="draggable" draggable="true">
+                    <img class="draggable" src="profileIcon.jpg" alt="Profile Icon">
+                </div>
+                <div class="draggable" draggable="true">
+                    <img class="draggable" src="profileIcon.jpg" alt="Profile Icon">
+                </div>
+            </div>
+        </div>
+        <div class="color-headers">
+            <div class="background-color-green-header">
+                <h1>Green Zone</h1>
+            </div>
+            <div class="background-color-yellow-header">
+                <h1>Yellow Zone</h1>
+            </div>
+            <div class="background-color-blue-header">
+                <h1>Blue Zone</h1>
+            </div>
+            <div class="background-color-red-header">
+                <h1>Red Zone</h1>
+            </div>
+        </div>
+        <div class="background-colors">
+            <div class="background-color-green">
+                <div class="border-box"></div>
+            </div>
+            <div class="background-color-yellow">
+                <div class="border-box"></div>
+            </div>
+            <div class="background-color-blue">
+                <div class="border-box"></div>
+            </div>
+            <div class="background-color-red">
+                <div class="border-box"></div>
+            </div>
+        </div>
+        <script src="drag.js"></script>
+    </body>
+</html>
