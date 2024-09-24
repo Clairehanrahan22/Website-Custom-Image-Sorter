@@ -1,5 +1,6 @@
 const draggables = document.querySelectorAll('.draggable');
 const dropZone = document.getElementById('dropZone');
+const checkButton = document.querySelector('.check-button');
 
 draggables.forEach(item => {
   item.addEventListener('dragstart', dragStart);
@@ -10,6 +11,20 @@ draggables.forEach(item => {
 
 dropZone.addEventListener('dragover', dragOver);
 dropZone.addEventListener('drop', drop);
+
+
+checkButton.addEventListener('click', () => {
+  console.log("Check button clicked");
+  // Add your logic here for what should happen when clicked
+});
+
+// Optional: Add touch support for mobile devices
+checkButton.addEventListener('touchstart', (e) => {
+  e.preventDefault(); // Prevents mouse event fallback
+  console.log("Check button touched");
+  // Add your logic here for what should happen when touched
+});
+
 
 let currentDraggedItem = null;
 let dragOffsetX = 0;
@@ -105,41 +120,3 @@ function touchEnd(e) {
 
   currentDraggedItem = null;
 }
-
-// function drop(e) {
-//     e.preventDefault();
-  
-//     const dropZoneRect = dropZone.getBoundingClientRect();
-    
-//     const offsetX = e.clientX - dropZoneRect.left - dragOffsetX;
-//     const offsetY = e.clientY - dropZoneRect.top - dragOffsetY;
-  
-//     // Position the dragged item
-//     currentDraggedItem.style.position = 'absolute';
-//     currentDraggedItem.style.left = `${offsetX}px`;
-//     currentDraggedItem.style.top = `${offsetY}px`;
-//     currentDraggedItem.style.display = 'block'; // Show it again
-  
-//     // Create sparkle effect at the drop point
-//     createSparkles(offsetX + itemWidth / 2, offsetY + itemHeight / 2, itemWidth, itemHeight);
-  
-//     // Append the item back to the drop zone
-//     dropZone.appendChild(currentDraggedItem);
-//     currentDraggedItem = null;
-//   }
-  
-//   function createSparkles(x, y) {
-//     for (let i = 0; i < 10; i++) {
-//       const sparkle = document.createElement('div');
-//       sparkle.classList.add('sparkle');
-//       sparkle.style.left = `${x + (Math.random() * 50 - 25)}px`;
-//       sparkle.style.top = `${y + (Math.random() * 50 - 25)}px`;
-  
-//       dropZone.appendChild(sparkle);
-  
-//       // Remove the sparkle after the animation ends
-//       setTimeout(() => {
-//         sparkle.remove();
-//       }, 500); // Matches the duration of the CSS animation
-//     }
-//   }
