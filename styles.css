@@ -53,12 +53,17 @@ html, body {
   /* Draggable items */
   .draggable {
     cursor: grab;
+    position: relative;
   }
 
   img {
     width: 75px;
     border-radius: 50%;
     border: 2px solid black;
+  }
+
+  .highlight {
+    transition: all 0.2s ease;  /* Smooth transition for size/position adjustments */
   }
 
 .check-button {
