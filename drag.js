@@ -1,3 +1,13 @@
+function preventDefault(e) {
+  // Only prevent scrolling if the target is not a draggable item
+  if (!e.target.classList.contains('draggable')) {
+    e.preventDefault();
+  }
+}
+
+// Apply touchmove event listener globally
+window.addEventListener('touchmove', preventDefault, { passive: false });
+
 let currentDraggedItem = null;
 let dragOffsetX = 0;
 let dragOffsetY = 0;
@@ -118,7 +128,6 @@ function touchStart(e) {
   currentDraggedItem.style.position = 'absolute';
   currentDraggedItem.style.left = `${touch.clientX - dragOffsetX}px`;
   currentDraggedItem.style.top = `${touch.clientY - dragOffsetY}px`;
-  currentDraggedItem.style.display = 'block';
 }
 
 function touchMove(e) {
@@ -133,6 +142,7 @@ function touchMove(e) {
 }
 
 function touchEnd(e) {
+  if (!currentDraggedItem) return;
   if (currentDraggedItem !== draggables[activeDraggableIndex]) return;
   const touch = e.changedTouches[0];
   const dropZoneRect = dropZone.getBoundingClientRect();
@@ -141,7 +151,6 @@ function touchEnd(e) {
   currentDraggedItem.style.position = 'absolute';
   currentDraggedItem.style.left = `${offsetX}px`;
   currentDraggedItem.style.top = `${offsetY}px`;
-  currentDraggedItem.style.display = 'block';
   dropZone.appendChild(currentDraggedItem);
   currentDraggedItem = null;
 }
