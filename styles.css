@@ -52,6 +52,9 @@ html, body {
   cursor: grab;
   position: relative;
   touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -moz-user-select: none;
 }
 
 img {
