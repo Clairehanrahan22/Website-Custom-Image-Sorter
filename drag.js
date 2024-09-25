@@ -1,11 +1,9 @@
 function preventDefault(e) {
-  // Only prevent scrolling if the target is not a draggable item
   if (!e.target.classList.contains('draggable')) {
     e.preventDefault();
   }
 }
 
-// Apply touchmove event listener globally
 window.addEventListener('touchmove', preventDefault, { passive: false });
 
 let currentDraggedItem = null;
@@ -122,7 +120,7 @@ function touchStart(e) {
   if (e.target !== draggables[activeDraggableIndex]) return;
   currentDraggedItem = e.target;
   const rect = currentDraggedItem.getBoundingClientRect();
-  const touch = e.touches[0];
+  const touch = e.clientX ? e : e.touches[0];
   dragOffsetX = touch.clientX - rect.left;
   dragOffsetY = touch.clientY - rect.top;
   currentDraggedItem.style.position = 'absolute';
@@ -133,7 +131,7 @@ function touchStart(e) {
 function touchMove(e) {
   if (currentDraggedItem !== draggables[activeDraggableIndex]) return;
   e.preventDefault();
-  const touch = e.touches[0];  
+  const touch = e.clientX ? e : e.touches[0];
   const dropZoneRect = dropZone.getBoundingClientRect();
   const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
   const offsetY = touch.clientY - dropZoneRect.top - dragOffsetY;
@@ -144,7 +142,7 @@ function touchMove(e) {
 function touchEnd(e) {
   if (!currentDraggedItem) return;
   if (currentDraggedItem !== draggables[activeDraggableIndex]) return;
-  const touch = e.changedTouches[0];
+  const touch = e.clientX ? e : e.changedTouches[0];
   const dropZoneRect = dropZone.getBoundingClientRect();
   const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
   const offsetY = touch.clientY - dropZoneRect.top - dragOffsetY;
