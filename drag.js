@@ -12,7 +12,7 @@ dropZone.addEventListener('drop', drop);
 
 draggables.forEach((item, index) => {
   item.addEventListener('dragstart', dragStart);
-  item.addEventListener('touchstart', touchStart, { passive: true });
+  item.addEventListener('touchstart', touchStart, { passive: false });
   item.addEventListener('touchmove', touchMove, { passive: false });
   item.addEventListener('touchend', touchEnd);
 });
