@@ -51,6 +51,7 @@ html, body {
 .draggable {
   cursor: grab;
   position: relative;
+  touch-action: none;
 }
 
 img {
