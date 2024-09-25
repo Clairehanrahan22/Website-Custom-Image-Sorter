@@ -1,10 +1,9 @@
-/* Ensure body and html take up the full height of the screen */
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-  }
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
   
 .home-page {
   position: relative;
@@ -29,42 +28,41 @@ html, body {
   color: white;
   margin: 5%;
 }
-  /* The entire screen is the drop zone, including the drag container */
-  #dropZone {
-    position: relative;
-    width: 100%;
-    height: 100%; /* Take up the entire screen */
-  }
-  
-  /* Drag container starts at the bottom, but is part of the drop zone */
-  #dragContainer {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center;
-    background-color: #f1f1f1;
-    height: 25%; /* Draggable items start in the bottom 40% */
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    border: 2px solid black;
-  }
-  
-  /* Draggable items */
-  .draggable {
-    cursor: grab;
-    position: relative;
-  }
 
-  img {
-    width: 75px;
-    border-radius: 50%;
-    border: 2px solid black;
-  }
+#dropZone {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+  
+#dragContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
+  height: 25%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border: 2px solid black;
+}
+  
+.draggable {
+  cursor: grab;
+  position: relative;
+}
 
-  .highlight {
-    transition: all 0.2s ease;  /* Smooth transition for size/position adjustments */
-  }
+img {
+  width: 75px;
+  border-radius: 50%;
+  border: 2px solid black;
+  z-index: 2;
+}
+
+.highlight {
+  transition: all 0.2s ease;
+}
 
 .check-button {
   z-index: 2;
@@ -87,6 +85,7 @@ html, body {
   top: 10%;
   z-index: -2;
 }
+
 .color-headers {
   width: 100%;
   top: 0;
@@ -99,30 +98,35 @@ html, body {
   text-align: center;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
 .background-color-green-header {
   background-color: #39b95c;
   height: 10%;
   width: 25%;
   border: 2px solid black;
 }
+
 .background-color-yellow-header {
   background-color: #ffb001;
   height: 10%;
   width: 25%;
   border: 2px solid black;
 }
+
 .background-color-blue-header {
   background-color: #4f71ec;
   height: 10%;
   width: 25%;
   border: 2px solid black;
 }
+
 .background-color-red-header {
   background-color: #ff3d0a;
   height: 10%;
   width: 25%;
   border: 2px solid black;
 }
+
 .background-color-green {
   top: 10%;
   height: 80%;
@@ -130,6 +134,7 @@ html, body {
   background-color: #d5fddb;
   border: 2px solid black;
 }
+
 .background-color-yellow {
   top: 10%;
   height: 80%;
@@ -137,6 +142,7 @@ html, body {
   background-color: #fff5c2;
   border: 2px solid black;
 }
+
 .background-color-blue {
   top: 10%;
   height: 80%;
@@ -144,6 +150,7 @@ html, body {
   background-color: #bfe4ff;
   border: 2px solid black;
 }
+
 .background-color-red {
   top: 10%;
   height: 80%;
@@ -151,6 +158,7 @@ html, body {
   background-color: #ffb8a6;
   border: 2px solid black;
 }
+
 .border-box {
   position: relative;
   border-top: 2px solid black;
