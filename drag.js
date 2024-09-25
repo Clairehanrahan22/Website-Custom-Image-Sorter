@@ -4,8 +4,8 @@ const checkButton = document.querySelector('.check-button');
 
 draggables.forEach(item => {
   item.addEventListener('dragstart', dragStart);
-  item.addEventListener('touchstart', touchStart);
-  item.addEventListener('touchmove', touchMove);
+  item.addEventListener('touchstart', touchStart, { passive: true });
+  item.addEventListener('touchmove', touchMove, { passive: false });
   item.addEventListener('touchend', touchEnd);
 });
 
@@ -70,53 +70,52 @@ function drop(e) {
     currentDraggedItem = null;
   }
 
-// Touch start (touch devices)
-function touchStart(e) {
-  currentDraggedItem = e.target;
-
-  // Calculate the touch offset relative to the element's position
-  const rect = currentDraggedItem.getBoundingClientRect();
-  const touch = e.touches[0];
-  dragOffsetX = touch.clientX - rect.left;
-  dragOffsetY = touch.clientY - rect.top;
-
-  setTimeout(() => {
-    currentDraggedItem.style.display = 'none'; // Hide while dragging
-  }, 0);
-}
-
-// Touch move (touch devices)
-function touchMove(e) {
-  e.preventDefault();
-  const touch = e.touches[0];
-
-  const dropZoneRect = dropZone.getBoundingClientRect();
   
-  // Calculate the new position relative to the drop zone
-  const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
-  const offsetY = touch.clientY - dropZoneRect.top - dragOffsetY;
-
-  currentDraggedItem.style.left = `${offsetX}px`;
-  currentDraggedItem.style.top = `${offsetY}px`;
-  currentDraggedItem.style.display = 'block'; // Keep visible while moving
-}
-
-// Touch end (touch devices)
-function touchEnd(e) {
-  const touch = e.changedTouches[0];
-  const dropZoneRect = dropZone.getBoundingClientRect();
-
-  const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
-  const offsetY = touch.clientY - dropZoneRect.top - dragOffsetY;
-
-  // Set the new position
-  currentDraggedItem.style.position = 'absolute';
-  currentDraggedItem.style.left = `${offsetX}px`;
-  currentDraggedItem.style.top = `${offsetY}px`;
-  currentDraggedItem.style.display = 'block'; // Make it visible again
-
-  // Append the item back to the drop zone
-  dropZone.appendChild(currentDraggedItem);
-
-  currentDraggedItem = null;
-}
+  function touchStart(e) {
+    currentDraggedItem = e.target;
+    
+    // Don't hide the item here. Let the user see what they're dragging.
+    const rect = currentDraggedItem.getBoundingClientRect();
+    const touch = e.touches[0];
+    dragOffsetX = touch.clientX - rect.left;
+    dragOffsetY = touch.clientY - rect.top;
+  
+    // Immediately update the position of the dragged item to follow the touch.
+    currentDraggedItem.style.position = 'absolute';
+    currentDraggedItem.style.left = `${touch.clientX - dragOffsetX}px`;
+    currentDraggedItem.style.top = `${touch.clientY - dragOffsetY}px`;
+    currentDraggedItem.style.display = 'block'; // Make sure it's visible
+  }
+  
+  function touchMove(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    
+    const dropZoneRect = dropZone.getBoundingClientRect();
+  
+    // Update the dragged item's position as the user moves their finger.
+    const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
+    const offsetY = touch.clientY - dropZoneRect.top - dragOffsetY;
+  
+    currentDraggedItem.style.left = `${offsetX}px`;
+    currentDraggedItem.style.top = `${offsetY}px`;
+  }
+  
+  function touchEnd(e) {
+    const touch = e.changedTouches[0];
+    const dropZoneRect = dropZone.getBoundingClientRect();
+  
+    const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
+    const offsetY = touch.clientY - dropZoneRect.top - dragOffsetY;
+  
+    // Finalize the position
+    currentDraggedItem.style.position = 'absolute';
+    currentDraggedItem.style.left = `${offsetX}px`;
+    currentDraggedItem.style.top = `${offsetY}px`;
+    currentDraggedItem.style.display = 'block'; // Ensure it's visible
+  
+    // Append the item back to the drop zone
+    dropZone.appendChild(currentDraggedItem);
+  
+    currentDraggedItem = null;
+  }
