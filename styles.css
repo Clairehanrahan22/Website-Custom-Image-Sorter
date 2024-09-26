@@ -71,12 +71,26 @@ img {
   z-index: 2;
   position: absolute;
   bottom: 5%;
-  right: 5%;
+  right: 3%;
   border-radius: 50%;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
+  width: 75px;
+}
+
+.undo {
+  z-index: 2;
+  position: absolute;
+  bottom: 5%;
+  left: 3%;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 75px;
 }
 
 .background-colors {
@@ -162,8 +176,15 @@ img {
   border: 2px solid black;
 }
 
+.emotions {
+  border-radius: 0%;
+  max-width: none;
+  width: 100%;
+  padding-top: 5%;
+}
+
 .border-box {
-  position: relative;
+  position: absolute;
   border-top: 2px solid black;
   width: 100%;
   height: 50%;
