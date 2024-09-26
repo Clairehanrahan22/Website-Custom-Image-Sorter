@@ -44,19 +44,19 @@ function highlightActiveDraggable() {
   });
   if (draggables[activeDraggableIndex]) {
     const activeItem = draggables[activeDraggableIndex];
-    const highlight = document.createElement('div');
-    highlight.classList.add('highlight');
-    const itemRect = activeItem.getBoundingClientRect();
-    highlight.style.position = 'absolute';
-    highlight.style.width = `${itemRect.width * 1.25}px`; 
-    highlight.style.height = `${itemRect.height * 1.25}px`; 
-    highlight.style.left = `-${(itemRect.width * 0.125)}px`; 
-    highlight.style.top = `-${(itemRect.height * 0.125)}px`; 
-    highlight.style.borderRadius = '50%';
-    highlight.style.backgroundColor = 'gold';
-    highlight.style.zIndex = '1'; 
-    activeItem.style.position = 'relative';
-    activeItem.appendChild(highlight);
+    // const highlight = document.createElement('div');
+    // highlight.classList.add('highlight');
+    // const itemRect = activeItem.getBoundingClientRect();
+    // highlight.style.position = 'absolute';
+    // highlight.style.width = `${itemRect.width * 1.25}px`; 
+    // highlight.style.height = `${itemRect.height * 1.25}px`; 
+    // highlight.style.left = `-${(itemRect.width * 0.125)}px`; 
+    // highlight.style.top = `-${(itemRect.height * 0.125)}px`; 
+    // highlight.style.borderRadius = '50%';
+    // highlight.style.backgroundColor = 'gold';
+    // highlight.style.zIndex = '1'; 
+    // activeItem.style.position = 'relative';
+    // activeItem.appendChild(highlight);
     activeItem.style.pointerEvents = 'auto';
   }
 }
@@ -69,7 +69,6 @@ function lockAndMove() {
   }
   activeDraggableIndex++;
   activeDraggableIndex++;
-  console.log(activeDraggableIndex);
   if (activeDraggableIndex < draggables.length) {
     highlightActiveDraggable();
   } else {

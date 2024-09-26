@@ -11,18 +11,6 @@
     <body>
         <div id="dropZone">
             <div id="dragContainer">
-                <div class="draggable" draggable="true">
-                    <img class="draggable masked-image" src="images/CheckIn/1st Hour/Claire.png" alt="Profile Icon">
-                </div>
-                <div class="draggable" draggable="true">
-                    <img class="draggable" src="profileIcon.jpg" alt="Profile Icon">
-                </div>
-                <div class="draggable" draggable="true">
-                    <img class="draggable" src="profileIcon.jpg" alt="Profile Icon">
-                </div>
-                <div class="draggable" draggable="true">
-                    <img class="draggable" src="profileIcon.jpg" alt="Profile Icon">
-                </div>
             </div>
         </div>
         <div class="color-headers">
@@ -41,15 +29,20 @@
         </div>
         <div class="background-colors">
             <div class="background-color-green">
+                <img src="images/CheckIn/Background/8.png" class="emotions">
                 <div class="border-box"></div>
             </div>
             <div class="background-color-yellow">
+                <img src="images/CheckIn/Background/5.png" class="emotions">
                 <div class="border-box"></div>
             </div>
             <div class="background-color-blue">
+                <img src="images/CheckIn/Background/1.png" class="emotions">
+                <img src="images/CheckIn/Background/2.png" class="emotions">
                 <div class="border-box"></div>
             </div>
             <div class="background-color-red">
+                <img src="images/CheckIn/Background/3.png" class="emotions">
                 <div class="border-box"></div>
             </div>
         </div>
@@ -57,7 +50,42 @@
             <img class="check-button" src="checkmark.jpg" alt="checkmark">
         </button>
         <script>
-
+            const imageLists = {
+                "1stHour": ["Claire.png", "Claire.png", "Claire.png"],
+                "3rdHour": ["Claire.png", "Claire.png", "Claire.png"],
+                "homeroom": ["Claire.png", "Claire.png", "Claire.png"]
+            };
+            function getClassFromURL() {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get('class'); 
+            }
+            function loadImages(classFolder) {
+                const container = document.getElementById('dragContainer');
+                const imagePath = `images/CheckIn/${classFolder}/`;
+                const images = imageLists[classFolder];
+                if (images) {
+                    images.forEach(image => {
+                        const draggableDiv = document.createElement('div');
+                        draggableDiv.className = 'draggable';
+                        draggableDiv.setAttribute('draggable', 'true');
+                        const imgElement = document.createElement('img');
+                        imgElement.src = `${imagePath}${image}`;
+                        imgElement.alt = `Image for ${classFolder}`;
+                        imgElement.className = 'draggable';
+                        // imgElement.className = 'class-image'; // Optional: Add highlight class
+                        draggableDiv.appendChild(imgElement);
+                        container.appendChild(draggableDiv);
+                    });
+                } else {
+                    container.innerText = 'No images found for the selected class.';
+                }
+            }
+            const selectedClass = getClassFromURL();
+            if (selectedClass) {
+                loadImages(selectedClass);
+            } else {
+                document.getElementById('dragContainer').innerText = 'No class selected.';
+            }
         </script>
         <script src="drag.js"></script>
     </body>
