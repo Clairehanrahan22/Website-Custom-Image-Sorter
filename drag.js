@@ -96,16 +96,12 @@ function lockAndMove() {
 
 function undo() {
   if (activeDraggableIndex === 0) {
-      // Do nothing if the index is 0
       return;
   } else {
-      // Decrease activeDraggableIndex by 2 if it is not 0
       activeDraggableIndex -= 2;
-      // Ensure the index doesn't go below 0
       if (activeDraggableIndex < 0) {
           activeDraggableIndex = 0;
       }
-      // Call the function to highlight the active draggable item
       highlightActiveDraggable();
   }
 }
