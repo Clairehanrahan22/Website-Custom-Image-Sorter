@@ -58,9 +58,8 @@ html, body {
 }
 
 img {
-  width: 75px;
   border-radius: 50%;
-  border: 2px solid black;
+  max-width: 200px;
   z-index: 2;
 }
 
