@@ -1,10 +1,10 @@
-function preventDefault(e) {
-  if (!e.target.classList.contains('draggable')) {
-    e.preventDefault();
-  }
-}
+// function preventDefault(e) {
+//   if (!e.target.classList.contains('draggable')) {
+//     e.preventDefault();
+//   }
+// }
 
-window.addEventListener('touchmove', preventDefault, { passive: false });
+// window.addEventListener('touchmove', preventDefault, { passive: false });
 
 let currentDraggedItem = null;
 let dragOffsetX = 0;
