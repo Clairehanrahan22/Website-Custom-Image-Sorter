@@ -10,6 +10,7 @@ let currentDraggedItem = null;
 let dragOffsetX = 0;
 let dragOffsetY = 0;
 let activeDraggableIndex = 0;
+let isTouch = false;
 
 const draggables = document.querySelectorAll('.draggable');
 const dropZone = document.getElementById('dropZone');
@@ -31,13 +32,17 @@ draggables.forEach((item, index) => {
 // item.addEventListener('touchmove', touchMove, { passive: false });
 // item.addEventListener('touchend', touchEnd);
 
-checkButton.addEventListener('click', () => {
+checkButton.addEventListener('touchstart', (e) => {
+  isTouch = true; // Set the flag to true when touch is used
+  e.preventDefault(); // Prevent the subsequent click event
   lockAndMove();
 });
 
-checkButton.addEventListener('touchstart', (e) => {
-  // e.preventDefault();
-  lockAndMove();
+checkButton.addEventListener('click', (e) => {
+  if (!isTouch) { // Only run click if no touch event has been detected
+    lockAndMove();
+  }
+  isTouch = false; // Reset the flag for future interactions
 });
 
 undoButton.addEventListener('click', () => {

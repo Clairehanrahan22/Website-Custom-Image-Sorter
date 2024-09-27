@@ -37,10 +37,10 @@ html, body {
 
 .dragZone {
   background-color: #f1f1f1;
-  height: 20%;
+  height: 100%;
   position: fixed;
-  bottom: 0;
-  width: 100%;
+  left: 0;
+  width: 20%;
   border: 2px solid black;
 
 }
@@ -48,15 +48,11 @@ html, body {
 #dragContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
   background-color: #f1f1f1;
   height: 100%;
-  position: absolute;
-  bottom: 0;
-  width: 85%;
-  left: 7.5%;
 }
   
 .draggable {
@@ -67,10 +63,10 @@ html, body {
   user-select: none;
   -moz-user-select: none;
   border-radius: 50%;
-  max-width: 150px;
+  max-width: 125px;
   z-index: 2;
   object-fit: contain;
-  min-width: 150px;
+  min-width: 125px;
 }
 
 .draggable img {
@@ -78,7 +74,7 @@ html, body {
   max-width: 150px;
   z-index: 2;
   object-fit: contain;
-  min-width: 150px;
+  min-width: 125px;
 }
 
 .highlight {
@@ -114,8 +110,9 @@ html, body {
 
 
 .color-headers {
-  width: 100%;
+  width: 80%;
   top: 0;
+  right: 0;
   height: 100%;
   z-index: -2;
   position: absolute;
@@ -127,7 +124,8 @@ html, body {
 }
 .background-colors {
   position: absolute;
-  width: 100%;
+  right: 0;
+  width: 80%;
   height: 100%;
   display: flex;
   flex-direction: row;
