@@ -74,16 +74,18 @@
                 const images = imageLists[classFolder];
                 if (images) {
                     images.forEach(image => {
-                        const draggableDiv = document.createElement('div');
-                        draggableDiv.className = 'draggable';
-                        draggableDiv.setAttribute('draggable', 'true');
+                        // const draggableDiv = document.createElement('div');
+                        // draggableDiv.className = 'draggable';
+                        // draggableDiv.setAttribute('draggable', 'true');
                         const imgElement = document.createElement('img');
                         imgElement.src = `${imagePath}${image}`;
                         imgElement.alt = `Image for ${classFolder}`;
                         imgElement.className = 'draggable';
+                        imgElement.setAttribute('draggable', 'true');
                         // imgElement.className = 'class-image'; // Optional: Add highlight class
-                        draggableDiv.appendChild(imgElement);
-                        container.appendChild(draggableDiv);
+                        // draggableDiv.appendChild(imgElement);
+                        // container.appendChild(draggableDiv);
+                        container.appendChild(imgElement)
                     });
                 } else {
                     container.innerText = 'No images found for the selected class.';

@@ -15,6 +15,7 @@ const draggables = document.querySelectorAll('.draggable');
 const dropZone = document.getElementById('dropZone');
 const checkButton = document.querySelector('.check-button');
 const undoButton = document.querySelector('.undo');
+console.log(draggables.length);
 
 dropZone.addEventListener('dragover', dragOver);
 dropZone.addEventListener('drop', drop);
@@ -82,7 +83,6 @@ function lockAndMove() {
     currentItem.style.backgroundColor = '';
   }
   activeDraggableIndex++;
-  activeDraggableIndex++;
   if (activeDraggableIndex < draggables.length) {
     highlightActiveDraggable();
   } else {
@@ -102,7 +102,7 @@ function undo() {
   if (activeDraggableIndex === 0) {
       return;
   } else {
-      activeDraggableIndex -= 2;
+      activeDraggableIndex -= 1;
       if (activeDraggableIndex < 0) {
           activeDraggableIndex = 0;
       }
