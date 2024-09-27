@@ -21,28 +21,32 @@ dropZone.addEventListener('drop', drop);
 
 draggables.forEach((item, index) => {
   item.addEventListener('dragstart', dragStart);
-  // item.addEventListener('touchstart', touchStart, { passive: false });
-  // item.addEventListener('touchmove', touchMove, { passive: false });
-  // item.addEventListener('touchend', touchEnd);
+  item.addEventListener('touchstart', touchStart);
+  item.addEventListener('touchmove', touchMove);
+  item.addEventListener('touchend', touchEnd);
 });
+
+// item.addEventListener('touchstart', touchStart, { passive: false });
+// item.addEventListener('touchmove', touchMove, { passive: false });
+// item.addEventListener('touchend', touchEnd);
 
 checkButton.addEventListener('click', () => {
   lockAndMove();
 });
 
-// checkButton.addEventListener('touchstart', (e) => {
-//   e.preventDefault();
-//   lockAndMove();
-// });
+checkButton.addEventListener('touchstart', (e) => {
+  // e.preventDefault();
+  lockAndMove();
+});
 
 undoButton.addEventListener('click', () => {
   undo();
 });
 
-// undoButton.addEventListener('touchstart', (e) => {
-//   e.preventDefault();
-//   undo();
-// });
+undoButton.addEventListener('touchstart', (e) => {
+  // e.preventDefault();
+  undo();
+});
 
 function highlightActiveDraggable() {
   draggables.forEach((item) => {
@@ -137,39 +141,42 @@ function drop(e) {
   currentDraggedItem = null;
 }
 
-// function touchStart(e) {
-//   if (e.target !== draggables[activeDraggableIndex]) return;
-//   currentDraggedItem = e.target;
-//   const rect = currentDraggedItem.getBoundingClientRect();
-//   const touch = e.clientX ? e : e.touches[0];
-//   dragOffsetX = touch.clientX - rect.left;
-//   dragOffsetY = touch.clientY - rect.top;
-//   currentDraggedItem.style.position = 'absolute';
-//   currentDraggedItem.style.left = `${touch.clientX - dragOffsetX}px`;
-//   currentDraggedItem.style.top = `${touch.clientY - dragOffsetY}px`;
-// }
+function touchStart(e) {
+  if (e.target !== draggables[activeDraggableIndex]) return;
+  currentDraggedItem = e.target;
+  const rect = currentDraggedItem.getBoundingClientRect();
+  // const touch = e.clientX ? e : e.touches[0];
+  const touch = e.touches[0];
+  dragOffsetX = touch.clientX - rect.left;
+  dragOffsetY = touch.clientY - rect.top;
+  currentDraggedItem.style.position = 'absolute';
+  currentDraggedItem.style.left = `${touch.clientX - dragOffsetX}px`;
+  currentDraggedItem.style.top = `${touch.clientY - dragOffsetY}px`;
+}
 
-// function touchMove(e) {
-//   if (currentDraggedItem !== draggables[activeDraggableIndex]) return;
-//   e.preventDefault();
-//   const touch = e.clientX ? e : e.touches[0];
-//   const dropZoneRect = dropZone.getBoundingClientRect();
-//   const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
-//   const offsetY = touch.clientY - dropZoneRect.top - dragOffsetY;
-//   currentDraggedItem.style.left = `${offsetX}px`;
-//   currentDraggedItem.style.top = `${offsetY}px`;
-// }
+function touchMove(e) {
+  if (currentDraggedItem !== draggables[activeDraggableIndex]) return;
+  e.preventDefault();
+  // const touch = e.clientX ? e : e.touches[0];
+  const touch = e.touches[0];
+  const dropZoneRect = dropZone.getBoundingClientRect();
+  const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
+  const offsetY = touch.clientY - dropZoneRect.top - dragOffsetY;
+  currentDraggedItem.style.left = `${offsetX}px`;
+  currentDraggedItem.style.top = `${offsetY}px`;
+}
 
-// function touchEnd(e) {
-//   if (!currentDraggedItem) return;
-//   if (currentDraggedItem !== draggables[activeDraggableIndex]) return;
-//   const touch = e.clientX ? e : e.changedTouches[0];
-//   const dropZoneRect = dropZone.getBoundingClientRect();
-//   const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
-//   const offsetY = touch.clientY - dropZoneRect.top - dragOffsetY;
-//   currentDraggedItem.style.position = 'absolute';
-//   currentDraggedItem.style.left = `${offsetX}px`;
-//   currentDraggedItem.style.top = `${offsetY}px`;
-//   dropZone.appendChild(currentDraggedItem);
-//   currentDraggedItem = null;
-// }
+function touchEnd(e) {
+  if (!currentDraggedItem) return;
+  if (currentDraggedItem !== draggables[activeDraggableIndex]) return;
+  // const touch = e.clientX ? e : e.changedTouches[0];
+  const touch = e.changedTouches[0];
+  const dropZoneRect = dropZone.getBoundingClientRect();
+  const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
+  const offsetY = touch.clientY - dropZoneRect.top - dragOffsetY;
+  currentDraggedItem.style.position = 'absolute';
+  currentDraggedItem.style.left = `${offsetX}px`;
+  currentDraggedItem.style.top = `${offsetY}px`;
+  dropZone.appendChild(currentDraggedItem);
+  currentDraggedItem = null;
+}
