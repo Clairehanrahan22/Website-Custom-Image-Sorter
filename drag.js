@@ -1,22 +1,10 @@
-// function preventDefault(e) {
-//   if (!e.target.classList.contains('draggable')) {
-//     e.preventDefault();
-//   }
-// }
-
-// window.addEventListener('touchmove', preventDefault, { passive: false });
-
 let currentDraggedItem = null;
 let dragOffsetX = 0;
 let dragOffsetY = 0;
-let activeDraggableIndex = 0;
 let isTouch = false;
 
 const draggables = document.querySelectorAll('.draggable');
 const dropZone = document.getElementById('dropZone');
-const checkButton = document.querySelector('.check-button');
-const undoButton = document.querySelector('.undo');
-console.log(draggables.length);
 
 dropZone.addEventListener('dragover', dragOver);
 dropZone.addEventListener('drop', drop);
@@ -27,95 +15,6 @@ draggables.forEach((item, index) => {
   item.addEventListener('touchmove', touchMove);
   item.addEventListener('touchend', touchEnd);
 });
-
-// item.addEventListener('touchstart', touchStart, { passive: false });
-// item.addEventListener('touchmove', touchMove, { passive: false });
-// item.addEventListener('touchend', touchEnd);
-
-checkButton.addEventListener('touchstart', (e) => {
-  isTouch = true; // Set the flag to true when touch is used
-  e.preventDefault(); // Prevent the subsequent click event
-  lockAndMove();
-});
-
-checkButton.addEventListener('click', (e) => {
-  if (!isTouch) { // Only run click if no touch event has been detected
-    lockAndMove();
-  }
-  isTouch = false; // Reset the flag for future interactions
-});
-
-undoButton.addEventListener('click', () => {
-  undo();
-});
-
-undoButton.addEventListener('touchstart', (e) => {
-  // e.preventDefault();
-  undo();
-});
-
-function highlightActiveDraggable() {
-  draggables.forEach((item) => {
-    const highlight = item.querySelector('.highlight');
-    if (highlight) {
-      highlight.remove();
-    }
-    item.style.pointerEvents = 'none';
-  });
-  if (draggables[activeDraggableIndex]) {
-    const activeItem = draggables[activeDraggableIndex];
-    const highlight = document.createElement('div');
-    highlight.classList.add('highlight');
-    const itemRect = activeItem.getBoundingClientRect();
-    highlight.style.position = 'absolute';
-    highlight.style.width = `${(itemRect.width * 1.5)/2}px`; 
-    highlight.style.height = `${itemRect.height/1.75}px`; 
-    highlight.style.left = `${(itemRect.width * 0.125)}px`; 
-    highlight.style.top = `${(itemRect.height * 0.25)}px`; 
-    highlight.style.borderRadius = '50%';
-    highlight.style.backgroundColor = 'gold';
-    highlight.style.zIndex = '1'; 
-    activeItem.style.position = 'relative';
-    activeItem.appendChild(highlight);
-    activeItem.style.pointerEvents = 'auto';
-  }
-}
-
-function lockAndMove() {
-  if (draggables[activeDraggableIndex]) {
-    const currentItem = draggables[activeDraggableIndex];
-    currentItem.style.pointerEvents = 'none';
-    currentItem.style.backgroundColor = '';
-  }
-  activeDraggableIndex++;
-  if (activeDraggableIndex < draggables.length) {
-    highlightActiveDraggable();
-  } else {
-    console.log("All items locked");
-    checkButton.style.display = 'none';
-    draggables.forEach((item) => {
-      const highlight = item.querySelector('.highlight');
-      if (highlight) {
-        highlight.remove(); 
-      }
-      item.style.pointerEvents = 'none';
-    });
-  }
-}
-
-function undo() {
-  if (activeDraggableIndex === 0) {
-      return;
-  } else {
-      activeDraggableIndex -= 1;
-      if (activeDraggableIndex < 0) {
-          activeDraggableIndex = 0;
-      }
-      highlightActiveDraggable();
-  }
-}
-
-highlightActiveDraggable();
 
 function dragStart(e) {
   if (e.target !== draggables[activeDraggableIndex]) return;
@@ -150,7 +49,6 @@ function touchStart(e) {
   if (e.target !== draggables[activeDraggableIndex]) return;
   currentDraggedItem = e.target;
   const rect = currentDraggedItem.getBoundingClientRect();
-  // const touch = e.clientX ? e : e.touches[0];
   const touch = e.touches[0];
   dragOffsetX = touch.clientX - rect.left;
   dragOffsetY = touch.clientY - rect.top;
@@ -162,7 +60,6 @@ function touchStart(e) {
 function touchMove(e) {
   if (currentDraggedItem !== draggables[activeDraggableIndex]) return;
   e.preventDefault();
-  // const touch = e.clientX ? e : e.touches[0];
   const touch = e.touches[0];
   const dropZoneRect = dropZone.getBoundingClientRect();
   const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
@@ -174,7 +71,6 @@ function touchMove(e) {
 function touchEnd(e) {
   if (!currentDraggedItem) return;
   if (currentDraggedItem !== draggables[activeDraggableIndex]) return;
-  // const touch = e.clientX ? e : e.changedTouches[0];
   const touch = e.changedTouches[0];
   const dropZoneRect = dropZone.getBoundingClientRect();
   const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
