@@ -17,7 +17,6 @@ draggables.forEach((item, index) => {
 });
 
 function dragStart(e) {
-  if (e.target !== draggables[activeDraggableIndex]) return;
   currentDraggedItem = e.target;
   const rect = currentDraggedItem.getBoundingClientRect();
   dragOffsetX = e.clientX - rect.left;
@@ -46,7 +45,6 @@ function drop(e) {
 }
 
 function touchStart(e) {
-  if (e.target !== draggables[activeDraggableIndex]) return;
   currentDraggedItem = e.target;
   const rect = currentDraggedItem.getBoundingClientRect();
   const touch = e.touches[0];
@@ -58,7 +56,6 @@ function touchStart(e) {
 }
 
 function touchMove(e) {
-  if (currentDraggedItem !== draggables[activeDraggableIndex]) return;
   e.preventDefault();
   const touch = e.touches[0];
   const dropZoneRect = dropZone.getBoundingClientRect();
@@ -69,8 +66,6 @@ function touchMove(e) {
 }
 
 function touchEnd(e) {
-  if (!currentDraggedItem) return;
-  if (currentDraggedItem !== draggables[activeDraggableIndex]) return;
   const touch = e.changedTouches[0];
   const dropZoneRect = dropZone.getBoundingClientRect();
   const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
