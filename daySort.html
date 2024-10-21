@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1">
+        <title>Custom Image Sorter</title>
+        <meta name="description" content="A website I created for a friend working in the special ed field, designed for students to drag and drop images and sort them into categories. ">
+        <meta name="keywords" content="">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div id="dropZone">
+            <div class="dragZone">
+                <div id="dragContainer">
+                    <div class="draggable" draggable="true"><h2>Monday</h2></div>
+                    <div class="draggable" draggable="true"><h2>Tuesday</h2></div>
+                    <div class="draggable" draggable="true"><h2>Wednesday</h2></div>
+                    <div class="draggable" draggable="true"><h2>Thursday</h2></div>
+                    <div class="draggable" draggable="true"><h2>Friday</h2></div>
+                </div>
+            </div>
+            <h3>Today is</h3><div id="snapZone"></div><h3>.</h3>
+        </div>
+        <script src="path/to/dayjs/dayjs.min.js"></script>
+        <script type="module" src="modifiedDrag.js"></script>
+        <script type="module">
+            import { selectedDay } from './modifiedDrag.js';
+    
+            // Check the selected day every time the snap happens
+            document.getElementById('snapZone').addEventListener('DOMSubtreeModified', () => {
+                console.log('Selected day:', selectedDay);
+                // You can perform further actions with selectedDay here, like comparing with the current day using day.js
+            });
+        </script>
+    </body>
+</html>
