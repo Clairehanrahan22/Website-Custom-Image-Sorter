@@ -21,16 +21,21 @@
             </div>
             <h3>Today is</h3><div id="snapZone"></div><h3>.</h3>
         </div>
-        <script src="path/to/dayjs/dayjs.min.js"></script>
         <script type="module" src="modifiedDrag.js"></script>
         <script type="module">
             import { selectedDay } from './modifiedDrag.js';
-    
-            // Check the selected day every time the snap happens
-            document.getElementById('snapZone').addEventListener('DOMSubtreeModified', () => {
+        
+            // Target the snap zone where the day will be dropped
+            const snapZone = document.getElementById('snapZone');
+        
+            // Create a MutationObserver to watch for changes in the snap zone's contents
+            const observer = new MutationObserver(() => {
                 console.log('Selected day:', selectedDay);
-                // You can perform further actions with selectedDay here, like comparing with the current day using day.js
+                // You can add any further logic that depends on the selected day here
             });
+        
+            // Configure the observer to watch for child node changes (i.e., text updates)
+            observer.observe(snapZone, { childList: true });
         </script>
     </body>
 </html>

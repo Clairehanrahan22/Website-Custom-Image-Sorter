@@ -8,7 +8,7 @@ const dropZone = document.getElementById('dropZone');
 const snapZone = document.getElementById('snapZone');
 
 // Variable to hold the selected day
-let selectedDay = "";
+export let selectedDay = "";
 
 // Add event listeners
 dropZone.addEventListener('dragover', dragOver);
