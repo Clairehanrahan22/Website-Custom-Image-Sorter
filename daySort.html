@@ -7,46 +7,93 @@
         <meta name="description" content="A website I created for a friend working in the special ed field, designed for students to drag and drop images and sort them into categories. ">
         <meta name="keywords" content="">
         <link rel="stylesheet" href="styles.css">
+        <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     </head>
     <body>
         <div id="dropZone">
-            <div class="dragZone">
-                <div id="dragContainer">
-                    <div class="draggable" draggable="true"><h2>Monday</h2></div>
-                    <div class="draggable" draggable="true"><h2>Tuesday</h2></div>
-                    <div class="draggable" draggable="true"><h2>Wednesday</h2></div>
-                    <div class="draggable" draggable="true"><h2>Thursday</h2></div>
-                    <div class="draggable" draggable="true"><h2>Friday</h2></div>
+            <div id="step1" class="dayOfWeekSelection">
+                <div class="dragZone">
+                    <div id="dragContainer">
+                        <div class="draggable" draggable="true"><h2>Monday</h2></div>
+                        <div class="draggable" draggable="true"><h2>Tuesday</h2></div>
+                        <div class="draggable" draggable="true"><h2>Wednesday</h2></div>
+                        <div class="draggable" draggable="true"><h2>Thursday</h2></div>
+                        <div class="draggable" draggable="true"><h2>Friday</h2></div>
+                    </div>
                 </div>
+                <h3>Today is</h3><div class="snapZone"></div><h3></h3>
             </div>
-            <h3>Today is</h3><div id="snapZone"></div><h3>.</h3>
+            <div id="step2" class="monthSelection" style="display: none;">
+                <div class="dragZone">
+                    <div id="dragContainer">
+                        <div class="draggable" draggable="true"><h2>January</h2></div>
+                        <div class="draggable" draggable="true"><h2>February</h2></div>
+                        <div class="draggable" draggable="true"><h2>March</h2></div>
+                        <div class="draggable" draggable="true"><h2>April</h2></div>
+                        <div class="draggable" draggable="true"><h2>May</h2></div>
+                        <div class="draggable" draggable="true"><h2>June</h2></div>
+                        <div class="draggable" draggable="true"><h2>July</h2></div>
+                        <div class="draggable" draggable="true"><h2>August</h2></div>
+                        <div class="draggable" draggable="true"><h2>September</h2></div>
+                        <div class="draggable" draggable="true"><h2>October</h2></div>
+                        <div class="draggable" draggable="true"><h2>November</h2></div>
+                        <div class="draggable" draggable="true"><h2>December</h2></div>
+                    </div>
+                </div>
+                <h3>Today is</h3><div class="dayOfWeekSpot"></div>, <div class="snapZone"></div><h3></h3>
+            </div>
+            <div id="step3" class="dayOfMonthSelection" style="display: none;">
+                <div class="dragZone">
+                    <div id="dragContainer">
+                        <div class="draggable" draggable="true"><h2>1</h2></div>
+                        <div class="draggable" draggable="true"><h2>2</h2></div>
+                        <div class="draggable" draggable="true"><h2>3</h2></div>
+                        <div class="draggable" draggable="true"><h2>4</h2></div>
+                        <div class="draggable" draggable="true"><h2>5</h2></div>
+                        <div class="draggable" draggable="true"><h2>6</h2></div>
+                        <div class="draggable" draggable="true"><h2>7</h2></div>
+                        <div class="draggable" draggable="true"><h2>8</h2></div>
+                        <div class="draggable" draggable="true"><h2>9</h2></div>
+                        <div class="draggable" draggable="true"><h2>10</h2></div>
+                        <div class="draggable" draggable="true"><h2>11</h2></div>
+                        <div class="draggable" draggable="true"><h2>12</h2></div>
+                        <div class="draggable" draggable="true"><h2>13</h2></div>
+                        <div class="draggable" draggable="true"><h2>14</h2></div>
+                        <div class="draggable" draggable="true"><h2>15</h2></div>
+                        <div class="draggable" draggable="true"><h2>16</h2></div>
+                        <div class="draggable" draggable="true"><h2>17</h2></div>
+                        <div class="draggable" draggable="true"><h2>18</h2></div>
+                        <div class="draggable" draggable="true"><h2>19</h2></div>
+                        <div class="draggable" draggable="true"><h2>20</h2></div>
+                        <div class="draggable" draggable="true"><h2>21</h2></div>
+                        <div class="draggable" draggable="true"><h2>22</h2></div>
+                        <div class="draggable" draggable="true"><h2>23</h2></div>
+                        <div class="draggable" draggable="true"><h2>24</h2></div>
+                        <div class="draggable" draggable="true"><h2>25</h2></div>
+                        <div class="draggable" draggable="true"><h2>26</h2></div>
+                        <div class="draggable" draggable="true"><h2>27</h2></div>
+                        <div class="draggable" draggable="true"><h2>28</h2></div>
+                        <div class="draggable" draggable="true"><h2>29</h2></div>
+                        <div class="draggable" draggable="true"><h2>30</h2></div>
+                        <div class="draggable" draggable="true"><h2>31</h2></div>
+                    </div>
+                </div>
+                <h3>Today is</h3><div class="dayOfWeekSpot"></div>, <div class="monthSpot"></div><div class="snapZone"></div><h3></h3>
+            </div>
+            <div id="step4" class="yearSelection" style="display: none;">
+                <div class="dragZone">
+                    <div id="dragContainer">
+                        <div class="draggable" draggable="true"><h2>Monday</h2></div>
+                        <div class="draggable" draggable="true"><h2>Tuesday</h2></div>
+                        <div class="draggable" draggable="true"><h2>Wednesday</h2></div>
+                        <div class="draggable" draggable="true"><h2>Thursday</h2></div>
+                        <div class="draggable" draggable="true"><h2>Friday</h2></div>
+                    </div>
+                </div>
+                <h3>Today is</h3><div class="dayOfWeekSpot"></div>, <div class="monthSpot"></div><div class="dayOfMonthSpot"></div><div class="snapZone"></div><h3></h3>
+            </div>
         </div>
-        <div class="nextButton" style="display: none;"><img src="images/nextIcon.png" ></div>
+        <div class="nextButton" style="display: none;"><img src="images/nextIcon.png" class="nextButton"></div>
         <script type="module" src="modifiedDrag.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-        <script type="module">
-            dayjs().format();
-            const nextButton = document.querySelector('.nextButton');
-            import { selectedDay } from './modifiedDrag.js';
-            const todayNumber = dayjs().day();
-            let today = '';
-            switch (todayNumber) {
-                case 1: today = 'Monday'; break;
-                case 2: today = 'Tuesday'; break;
-                case 3: today = 'Wednesday'; break;
-                case 4: today = 'Thursday'; break;
-                default: today = 'Friday'; break;
-            }
-            const snapZone = document.getElementById('snapZone');
-            const observer = new MutationObserver(() => {
-                if (today === selectedDay) {
-                    console.log('Today matches the selected day');
-                    nextButton.style.display = 'block';
-                } else {
-                    nextButton.style.display = 'none';
-                }
-            });
-            observer.observe(snapZone, { childList: true });
-        </script>
     </body>
 </html>
