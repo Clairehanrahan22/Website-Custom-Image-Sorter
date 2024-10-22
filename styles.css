@@ -83,13 +83,7 @@ html, body {
   min-width: 100px;
 }
 
-#snapZone { 
-  width: 10%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
+
 .color-headers {
   width: 75%;
   top: 0;
@@ -162,4 +156,24 @@ html, body {
   width: 100%;
   height: 50%;
   top: 45%;
+}
+
+
+
+
+
+#snapZone { 
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.nextButton, .nextButton img {
+  position: absolute;
+  width: 25%;
+  bottom: 5%;
+  right: 2.5%;
+  z-index: 2;
 }

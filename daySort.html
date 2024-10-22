@@ -21,20 +21,31 @@
             </div>
             <h3>Today is</h3><div id="snapZone"></div><h3>.</h3>
         </div>
+        <div class="nextButton" style="display: none;"><img src="images/nextIcon.png" ></div>
         <script type="module" src="modifiedDrag.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
         <script type="module">
+            dayjs().format();
+            const nextButton = document.querySelector('.nextButton');
             import { selectedDay } from './modifiedDrag.js';
-        
-            // Target the snap zone where the day will be dropped
+            const todayNumber = dayjs().day();
+            let today = '';
+            switch (todayNumber) {
+                case 1: today = 'Monday'; break;
+                case 2: today = 'Tuesday'; break;
+                case 3: today = 'Wednesday'; break;
+                case 4: today = 'Thursday'; break;
+                default: today = 'Friday'; break;
+            }
             const snapZone = document.getElementById('snapZone');
-        
-            // Create a MutationObserver to watch for changes in the snap zone's contents
             const observer = new MutationObserver(() => {
-                console.log('Selected day:', selectedDay);
-                // You can add any further logic that depends on the selected day here
+                if (today === selectedDay) {
+                    console.log('Today matches the selected day');
+                    nextButton.style.display = 'block';
+                } else {
+                    nextButton.style.display = 'none';
+                }
             });
-        
-            // Configure the observer to watch for child node changes (i.e., text updates)
             observer.observe(snapZone, { childList: true });
         </script>
     </body>

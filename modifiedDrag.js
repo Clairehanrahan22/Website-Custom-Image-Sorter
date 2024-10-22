@@ -7,10 +7,11 @@ const draggables = document.querySelectorAll('.draggable');
 const dropZone = document.getElementById('dropZone');
 const snapZone = document.getElementById('snapZone');
 
-// Variable to hold the selected day
 export let selectedDay = "";
+export let selectedMonth = "";
+export let selectedDayOfMonth = "";
+export let selectedYear = "";
 
-// Add event listeners
 dropZone.addEventListener('dragover', dragOver);
 dropZone.addEventListener('drop', drop);
 
@@ -42,12 +43,11 @@ function drop(e) {
   const offsetX = e.clientX - dropZoneRect.left - dragOffsetX;
   const offsetY = e.clientY - dropZoneRect.top - dragOffsetY;
   
-  // Snap logic
   if (isNearSnapZone(e.clientX, e.clientY)) {
-    snapZone.innerHTML = currentDraggedItem.innerHTML; // Snap the item to snap zone
-    selectedDay = currentDraggedItem.innerText.trim(); // Update selectedDay with the dropped item's text
-    console.log('Selected day is now:', selectedDay); // You can use this or display it somewhere
-    currentDraggedItem.style.display = 'none'; // Hide the original item
+    snapZone.innerHTML = currentDraggedItem.innerHTML;
+    selectedDay = currentDraggedItem.innerText.trim();
+    console.log('Selected day is now:', selectedDay); 
+    currentDraggedItem.style.display = 'none'; 
   } else {
     currentDraggedItem.style.position = 'absolute';
     currentDraggedItem.style.left = `${offsetX}px`;
@@ -58,7 +58,6 @@ function drop(e) {
   currentDraggedItem = null;
 }
 
-// Touch events
 function touchStart(e) {
   currentDraggedItem = e.target;
   const rect = currentDraggedItem.getBoundingClientRect();
@@ -85,13 +84,11 @@ function touchEnd(e) {
   const dropZoneRect = dropZone.getBoundingClientRect();
   const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
   const offsetY = touch.clientY - dropZoneRect.top - dragOffsetY;
-  
-  // Snap logic for touch
   if (isNearSnapZone(touch.clientX, touch.clientY)) {
-    snapZone.innerHTML = currentDraggedItem.innerHTML; // Snap the item to snap zone
-    selectedDay = currentDraggedItem.innerText.trim(); // Update selectedDay with the dropped item's text
-    console.log('Selected day is now:', selectedDay); // You can use this or display it somewhere
-    currentDraggedItem.style.display = 'none'; // Hide the original item
+    snapZone.innerHTML = currentDraggedItem.innerHTML; 
+    selectedDay = currentDraggedItem.innerText.trim(); 
+    console.log('Selected day is now:', selectedDay); 
+    currentDraggedItem.style.display = 'none'; 
   } else {
     currentDraggedItem.style.position = 'absolute';
     currentDraggedItem.style.left = `${offsetX}px`;
@@ -101,10 +98,9 @@ function touchEnd(e) {
   currentDraggedItem = null;
 }
 
-// Utility function to check if the element is near the snap zone
 function isNearSnapZone(x, y) {
   const snapRect = snapZone.getBoundingClientRect();
-  const threshold = 50; // Adjust threshold for how close it needs to be to snap
+  const threshold = 50;
   return (
     x > snapRect.left - threshold &&
     x < snapRect.right + threshold &&
