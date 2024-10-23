@@ -157,7 +157,7 @@ nextButton.addEventListener('click', () => {
     yearSpot.innerText = selectedYear;
     nextButton.style.display = 'none';
   } else if (currentStep == 6) { 
-    window.location.href = 'clothingPicker.html';
+    window.location.href = 'index.html';
   }
   stepComplete = false
 });
