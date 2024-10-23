@@ -10,30 +10,58 @@ let selectedDay = "";
 let selectedMonth = "";
 let selectedDayOfMonth = "";
 let selectedYear = "";
+let selectedYesterday = "";
+let selectedTomorrow = "";
+
+let stepComplete = false;
 
 const nextButton = document.querySelector('.nextButton');
 const dayOfWeekSpot = document.querySelectorAll('.dayOfWeekSpot');
 const monthSpot = document.querySelectorAll('.monthSpot');
-const dayOfMonthSpot = document.querySelector('.dayOfMonthSpot');
+const dayOfMonthSpot = document.querySelectorAll('.dayOfMonthSpot');
+const yearSpot = document.querySelector('.yearSpot');
+const yesterdaySpot = document.querySelectorAll('.yesterday');
+const tomorrowSpot = document.querySelector('.tomorrow');
 let currentStep = 1;
-const totalSteps = 4;
+const totalSteps = 6;
 
 dayjs().format();
 
 const todayNumber = dayjs().day();
 let today = '';
+let yesterday = '';
+let tomorrow = '';
 switch (todayNumber) {
-  case 1: today = 'Monday'; break;
-  case 2: today = 'Tuesday'; break;
-  case 3: today = 'Wednesday'; break;
-  case 4: today = 'Thursday'; break;
-  default: today = 'Friday'; break;
+  case 1: 
+    today = "Monday"; 
+    yesterday = "Sunday"; 
+    tomorrow = "Tuesday";
+    break;
+  case 2: 
+    today = "Tuesday"; 
+    yesterday = "Monday"; 
+    tomorrow = "Wednesday";
+    break;
+  case 3: 
+    today = "Wednesday"; 
+    yesterday = "Tuesday"; 
+    tomorrow = "Thursday";
+    break;
+  case 4: 
+    today = "Thursday"; 
+    yesterday = "Wednesday"; 
+    tomorrow = "Friday";
+    break;
+  default: 
+    today = "Friday"; 
+    yesterday = "Thursday"; 
+    tomorrow = "Saturday";
+    break;
 }
 
 const thisMonth = dayjs().month()
 const todayDate = dayjs().date();
 const thisYear = dayjs().year();
-console.log(todayDate);
 
 let todayMonth = '';
 switch (thisMonth) {
@@ -52,7 +80,7 @@ switch (thisMonth) {
 }
 
 function getActiveSnapZone() {
-  return snapZones[currentStep - 1]; // Assuming steps are indexed 1 to totalSteps
+  return snapZones[currentStep - 1];
 }
 
 function showStep(step) {
@@ -62,55 +90,76 @@ function showStep(step) {
   }
   const snapZone = getActiveSnapZone();
   const observer = new MutationObserver(() => {
-    if (currentStep == 1) {
-      if (today === selectedDay) {
-        nextButton.style.display = 'block';
-      } else {
-        nextButton.style.display = 'none';
-      }
-    } else if (currentStep == 2) {
-      if (todayMonth === selectedMonth) {
-        nextButton.style.display = 'block';
-      } else {
-        nextButton.style.display = 'none';
-      }
-    } else if (currentStep == 3) {
-      if (todayDate === selectedDayOfMonth) {
-        nextButton.style.display = 'block';
-      } else {
-        nextButton.style.display = 'none';
-      }
-    } else if (currentStep == 4) {
-      if (thisYear === selectedYear) {
-        nextButton.style.display = 'block';
-      } else {
-        nextButton.style.display = 'none';
-      }
+    if (currentStep == 1 && yesterday === selectedYesterday) {
+      nextButton.style.display = 'block';
+      stepComplete = true;
+    } else if (currentStep == 2 && today === selectedDay) {
+      nextButton.style.display = 'block';
+      stepComplete = true;
+    } else if (currentStep == 3 && todayMonth === selectedMonth) {
+      nextButton.style.display = 'block';
+      stepComplete = true;
+    } else if (currentStep == 4 && todayDate === selectedDayOfMonth) {
+      nextButton.style.display = 'block';
+      stepComplete = true;
+    } else if (currentStep == 5 && thisYear === selectedYear) {
+      nextButton.style.display = 'block';
+      stepComplete = true;
+    } else if (currentStep == 6 && tomorrow === selectedTomorrow) {
+      nextButton.style.display = 'block';
+      stepComplete = true;
+    } else {
+      nextButton.style.display = 'none';
+      stepComplete = false;
     }
   });
   observer.observe(snapZone, { childList: true });
 }
+
 showStep(currentStep);
+
+
 
 nextButton.addEventListener('click', () => {
   if (currentStep == 1) {
-      currentStep++;
-      showStep(currentStep);
-      dayOfWeekSpot[0].innerText = selectedDay;
+    currentStep++;
+    showStep(currentStep);
+    yesterdaySpot[0].innerText = selectedYesterday;
+    nextButton.style.display = 'none';
   } else if (currentStep == 2) {
-      currentStep++;
-      showStep(currentStep);
-      dayOfWeekSpot[1].innerText = selectedDay;
-      monthSpot[0].innerText = selectedMonth;
+    currentStep++;
+    showStep(currentStep);
+    yesterdaySpot[1].innerText = selectedYesterday;
+    dayOfWeekSpot[0].innerText = selectedDay;
+    nextButton.style.display = 'none';
   } else if (currentStep == 3) {
-      currentStep++;
-      showStep(currentStep);
-      dayOfWeekSpot[2].innerText = selectedDay;
-      monthSpot[1].innerText = selectedMonth;
-      dayOfMonthSpot.innerText = selectedDayOfMonth;
+    currentStep++;
+    showStep(currentStep);
+    yesterdaySpot[2].innerText = selectedYesterday;
+    dayOfWeekSpot[1].innerText = selectedDay;
+    monthSpot[0].innerText = selectedMonth;
+    nextButton.style.display = 'none';
   } else if (currentStep == 4) {
-      window.location.href = 'clothingPicker.html';
+    currentStep++;
+    showStep(currentStep);
+    yesterdaySpot[3].innerText = selectedYesterday;
+    dayOfWeekSpot[2].innerText = selectedDay;
+    monthSpot[1].innerText = selectedMonth;
+    dayOfMonthSpot[0].innerText = selectedDayOfMonth;
+    nextButton.style.display = 'none';
+  } else if (currentStep == 5) {
+    currentStep++;
+    showStep(currentStep);
+    yesterdaySpot[4].innerText = selectedYesterday;
+    dayOfWeekSpot[3].innerText = selectedDay;
+    monthSpot[2].innerText = selectedMonth;
+    dayOfMonthSpot[1].innerText = selectedDayOfMonth;
+    yearSpot.innerText = selectedYear;
+    nextButton.style.display = 'none';
+  } else if (currentStep == 6) { 
+    window.location.href = 'clothingPicker.html';
   }
+  stepComplete = false
 });
 
 
@@ -125,6 +174,7 @@ draggables.forEach((item) => {
 });
 
 function dragStart(e) {
+  if (stepComplete) return;
   currentDraggedItem = e.target;
   const rect = currentDraggedItem.getBoundingClientRect();
   dragOffsetX = e.clientX - rect.left;
@@ -134,12 +184,12 @@ function dragStart(e) {
     currentDraggedItem.style.display = 'none';
   }, 0);
 }
-
 function dragOver(e) {
   e.preventDefault();
 }
 
 function drop(e) {
+  if (stepComplete) return;
   e.preventDefault();
   const dropZoneRect = dropZone.getBoundingClientRect();
   const offsetX = e.clientX - dropZoneRect.left - dragOffsetX;
@@ -148,18 +198,21 @@ function drop(e) {
   if (isNearSnapZone(e.clientX, e.clientY, activeSnapZone)) {
       activeSnapZone.innerHTML = currentDraggedItem.innerHTML;
       if (currentStep == 1) {
-        selectedDay = currentDraggedItem.innerText.trim();
+        selectedYesterday = currentDraggedItem.innerText.trim();
       } else if (currentStep == 2) {
-        selectedMonth = currentDraggedItem.innerText.trim();
+        selectedDay = currentDraggedItem.innerText.trim();
       } else if (currentStep == 3) {
+        selectedMonth = currentDraggedItem.innerText.trim();
+      } else if (currentStep == 4) {
         selectedDayOfMonth = currentDraggedItem.innerText.trim();
         selectedDayOfMonth = parseInt(selectedDayOfMonth, 10);
-      } else if (currentStep == 4) {
+      } else if (currentStep == 5) {
         selectedYear = currentDraggedItem.innerText.trim();
         selectedYear = parseInt(selectedYear, 10);
+      } else if (currentStep == 6) {
+        selectedTomorrow = currentDraggedItem.innerText.trim();
       }
       currentDraggedItem.style.display = 'none'; 
-      console.log(selectedDayOfMonth);
   } else {
       currentDraggedItem.style.position = 'absolute';
       currentDraggedItem.style.left = `${offsetX}px`;
@@ -171,6 +224,7 @@ function drop(e) {
 }
 
 function touchStart(e) {
+  if (stepComplete) return;
   currentDraggedItem = e.target;
   const rect = currentDraggedItem.getBoundingClientRect();
   const touch = e.touches[0];
@@ -192,26 +246,28 @@ function touchMove(e) {
 }
 
 function touchEnd(e) {
+  if (stepComplete) return;
   const touch = e.changedTouches[0];
   const dropZoneRect = dropZone.getBoundingClientRect();
   const offsetX = touch.clientX - dropZoneRect.left - dragOffsetX;
   const offsetY = touch.clientY - dropZoneRect.top - dragOffsetY;
-
-  // Get the current active snap zone based on the step
   const activeSnapZone = getActiveSnapZone();
-
   if (isNearSnapZone(touch.clientX, touch.clientY, activeSnapZone)) {
     activeSnapZone.innerHTML = currentDraggedItem.innerHTML; 
     if (currentStep == 1) {
-      selectedDay = currentDraggedItem.innerText.trim();
+      selectedYesterday = currentDraggedItem.innerText.trim();
     } else if (currentStep == 2) {
-      selectedMonth = currentDraggedItem.innerText.trim();
+      selectedDay = currentDraggedItem.innerText.trim();
     } else if (currentStep == 3) {
+      selectedMonth = currentDraggedItem.innerText.trim();
+    } else if (currentStep == 4) {
       selectedDayOfMonth = currentDraggedItem.innerText.trim();
       selectedDayOfMonth = parseInt(selectedDayOfMonth, 10);
-    } else if (currentStep == 4) {
+    } else if (currentStep == 5) {
       selectedYear = currentDraggedItem.innerText.trim();
       selectedYear = parseInt(selectedYear, 10);
+    } else if (currentStep == 6) {
+      selectedTomorrow = currentDraggedItem.innerText.trim();
     } 
     currentDraggedItem.style.display = 'none'; 
   } else {
