@@ -151,6 +151,12 @@ html, body {
   width: 100%;
   padding-top: 1%;
 }
+.secondary-picture-holder {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
 .border-box {
   position: absolute;
   border-top: 2px solid black;
