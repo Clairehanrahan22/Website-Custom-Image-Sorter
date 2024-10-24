@@ -187,6 +187,8 @@ html, body {
   border-radius: 50%;
   height: 100%;
   margin-left: 0.5%;
+  font-size: 150%;
+  font-weight: 900;
 }
 
 .nextButton, .nextButton img {
@@ -231,9 +233,10 @@ html, body {
   font-size: 150%;
   font-weight: 900;
   margin-left: 0.5%;
-  margin-right: 0.5%;
 }
 
 .daySortDrag {
   min-width:unset;
+  margin: 2.5% auto;
 }
+
