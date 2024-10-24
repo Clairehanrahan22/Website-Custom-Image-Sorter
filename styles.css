@@ -74,6 +74,7 @@ html, body {
   z-index: 2;
   object-fit: contain;
   min-width: 80px;
+  margin: 0;
 }
 
 .draggable img {
